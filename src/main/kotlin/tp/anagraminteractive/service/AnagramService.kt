@@ -41,7 +41,7 @@ class AnagramService {
     /**
      * Return associated set of anagrams. Only return Anagrams if input word has been previously used in check function.
      */
-    fun findForPreviouslySearchedAnagramsOf(word: String): MutableSet<String> {
+    fun findStoredAnagramsOfPreviouslySearched(word: String): MutableSet<String> {
         return getAssociatedSet(
             sortedAnagramToAssociatedWords[prepareAndSort(word)],
             word

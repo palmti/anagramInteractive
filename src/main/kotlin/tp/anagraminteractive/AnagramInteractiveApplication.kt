@@ -23,7 +23,7 @@ fun main(args: Array<String>) {
 
 private fun checkFunction() {
 
-    println("Do you want to call the first or the second function? Please Enter 1 or 2:")
+    println("Do you want to call the first or the second function? Please Enter 1 or 2.")
     val func = readLine()
 
     if (func == "1") {
@@ -38,7 +38,7 @@ private fun checkFunction() {
 
         println("Enter the word, you would like to find the previously stored anagrams for.")
         val word: String = readln()
-        println(anagramService.findForPreviouslySearchedAnagramsOf(word))
+        println(anagramService.findStoredAnagramsOfPreviouslySearched(word))
     }
 
 }
