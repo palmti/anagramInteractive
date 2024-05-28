@@ -41,7 +41,7 @@ class AnagramService {
     /**
      * Return associated set of anagrams. Only return Anagrams if input word has been previously used in check function.
      */
-    fun findStoredAnagramsOfPreviouslySearched(word: String): MutableSet<String> {
+    fun findStoredAnagramsOfPreviouslySearched(word: String): List<String>? {
         return getAssociatedSet(
             sortedAnagramToAssociatedWords[prepareAndSort(word)],
             word
@@ -51,11 +51,12 @@ class AnagramService {
     private fun getAssociatedSet(
         associatedSet: LinkedHashSet<String>?,
         word: String
-    ): MutableSet<String> {
+    ): List<String> {
+        val resultSet: List<String>?
         if (associatedSet != null) {
-            if (associatedSet.contains(word)) associatedSet.remove(word) else return mutableSetOf()
-            return associatedSet
-        } else return mutableSetOf()
+            if (associatedSet.contains(word)) resultSet =associatedSet.toList().minus(word) else return listOf()
+            return resultSet
+        } else return listOf()
     }
 
 
@@ -72,7 +73,6 @@ class AnagramService {
             orderedWord
         ) { linkedSetOf() }
             .addAll(setOf(word1, word2))
-
 
     /**
      * Alternative, disregarded Method
@@ -92,14 +92,14 @@ class AnagramService {
         val reducedLength = string1NoWhiteSpaces.size
         if (reducedLength != string2NoWhiteSpaces.size) return false
 
-        for (i in 0..< reducedLength) {
+        for (i in 0..<reducedLength) {
             count[string1NoWhiteSpaces[i].code]++
             count[string2NoWhiteSpaces[i].code]--
 
             countForKey[string1NoWhiteSpaces[i].code]++
         }
         var orderedAnagram = ""
-        for (i in 0..< ASCII_CHAR_NUMBER) {
+        for (i in 0..<ASCII_CHAR_NUMBER) {
             if (count[i] != 0) return false
             for (j in 0..<countForKey[i]) orderedAnagram += Char(i)
         }

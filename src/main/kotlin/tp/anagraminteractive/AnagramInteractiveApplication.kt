@@ -32,7 +32,6 @@ private fun checkFunction() {
         println("Enter the second word to be checked.")
         val word2: String = readln()
 
-
         println(anagramService.anagramCheckerStoreAtMatch(word1, word2))
     } else if (func == "2") {
 
