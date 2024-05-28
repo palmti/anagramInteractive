@@ -52,10 +52,10 @@ class AnagramService {
         associatedSet: LinkedHashSet<String>?,
         word: String
     ): List<String> {
-        val resultSet: List<String>?
+        val resultList: List<String>
         if (associatedSet != null) {
-            if (associatedSet.contains(word)) resultSet =associatedSet.toList().minus(word) else return listOf()
-            return resultSet
+            if (associatedSet.contains(word)) resultList =associatedSet.toList().minus(word) else return listOf()
+            return resultList
         } else return listOf()
     }
 
