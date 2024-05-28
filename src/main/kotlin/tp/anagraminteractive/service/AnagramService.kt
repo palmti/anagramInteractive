@@ -42,20 +42,21 @@ class AnagramService {
      * Return associated set of anagrams. Only return Anagrams if input word has been previously used in check function.
      */
     fun findStoredAnagramsOfPreviouslySearched(word: String): List<String>? {
-        return getAssociatedSet(
+        return getAssociatedAnagrams(
             sortedAnagramToAssociatedWords[prepareAndSort(word)],
             word
         )
     }
 
-    private fun getAssociatedSet(
-        associatedSet: LinkedHashSet<String>?,
+    private fun getAssociatedAnagrams(
+        allAssociatedAnagrams: LinkedHashSet<String>?,
         word: String
     ): List<String> {
-        val resultList: List<String>
-        if (associatedSet != null) {
-            if (associatedSet.contains(word)) resultList =associatedSet.toList().minus(word) else return listOf()
-            return resultList
+        val associatedAnagramsWithoutInput: List<String>
+        if (allAssociatedAnagrams != null) {
+            if (allAssociatedAnagrams.contains(word)) associatedAnagramsWithoutInput =
+                allAssociatedAnagrams.toList().minus(word) else return listOf()
+            return associatedAnagramsWithoutInput
         } else return listOf()
     }
 
@@ -72,7 +73,7 @@ class AnagramService {
         sortedAnagramToAssociatedWords.computeIfAbsent(
             orderedWord
         ) { linkedSetOf() }
-            .addAll(setOf(word1, word2))
+            .addAll(listOf(word1, word2))
 
     /**
      * Alternative, disregarded Method
